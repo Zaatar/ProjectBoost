@@ -112,6 +112,7 @@ MonoBehaviour:
   vfx_Success: {fileID: 8300000, guid: 0585207ed2bd2e947aebe84b6f8cfb30, type: 3}
   ps_Success: {fileID: 1850744606335953797}
   ps_Explosion: {fileID: 6699185476120936111}
+  levelManager: {fileID: 0}
 --- !u!82 &8426759645955675649
 AudioSource:
   m_ObjectHideFlags: 0

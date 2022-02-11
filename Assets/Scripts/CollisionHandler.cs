@@ -9,6 +9,7 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] AudioClip vfx_Success;
     [SerializeField] ParticleSystem ps_Success;
     [SerializeField] ParticleSystem ps_Explosion;
+    [SerializeField] LevelManager levelManager;
 
     AudioSource objectAudioSource;
     int currentSceneIndex;
@@ -20,6 +21,7 @@ public class CollisionHandler : MonoBehaviour
     {
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         objectAudioSource = gameObject.GetComponent<AudioSource>();
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     private void Update()
@@ -82,15 +84,19 @@ public class CollisionHandler : MonoBehaviour
 
     void LoadNextLevel()
     {
+        levelManager.LoadNextLevel();
+        /*
         nextSceneIndex = currentSceneIndex+1;
         if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
         {
             nextSceneIndex = 0;
         }
         SceneManager.LoadScene(nextSceneIndex);
+        */
     }
     void ReloadLevel()
     {
-        SceneManager.LoadScene(currentSceneIndex);
+        levelManager.ReloadLevel();
+        //SceneManager.LoadScene(currentSceneIndex);
     }
 }
