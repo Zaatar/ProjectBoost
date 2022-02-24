@@ -3,9 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] LevelManager levelManager;
+    [SerializeField] GameObject backgroundImage;
+
+    private void Start()
+    {
+        this.gameObject.SetActive(true);
+    }
+
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        this.gameObject.SetActive(false);
+        levelManager.LoadNextLevel();
     }
 
     public void QuitGame()

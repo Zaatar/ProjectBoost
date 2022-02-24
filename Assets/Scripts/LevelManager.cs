@@ -41,4 +41,9 @@ public class LevelManager : MonoBehaviour
         currentLevelInstance = Instantiate(levelsParent.GetChild(currentLevel));
         currentLevelInstance.gameObject.SetActive(true);
     }
+
+    public void IncrementStartLevel()
+    {
+        startLevel++;
+    }
 }
