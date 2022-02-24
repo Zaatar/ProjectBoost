@@ -12,14 +12,11 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] LevelManager levelManager;
 
     AudioSource objectAudioSource;
-    int currentSceneIndex;
-    int nextSceneIndex;
     bool isTransitioning = false;
     bool collisionsActive = true;
 
     private void Start()
     {
-        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         objectAudioSource = gameObject.GetComponent<AudioSource>();
         levelManager = FindObjectOfType<LevelManager>();
     }
@@ -85,18 +82,9 @@ public class CollisionHandler : MonoBehaviour
     void LoadNextLevel()
     {
         levelManager.LoadNextLevel();
-        /*
-        nextSceneIndex = currentSceneIndex+1;
-        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
-        {
-            nextSceneIndex = 0;
-        }
-        SceneManager.LoadScene(nextSceneIndex);
-        */
     }
     void ReloadLevel()
     {
         levelManager.ReloadLevel();
-        //SceneManager.LoadScene(currentSceneIndex);
     }
 }

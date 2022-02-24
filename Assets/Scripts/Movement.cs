@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody), typeof(AudioSource))]
 public class Movement : MonoBehaviour
 {
     [SerializeField] float thrustSpeed;
