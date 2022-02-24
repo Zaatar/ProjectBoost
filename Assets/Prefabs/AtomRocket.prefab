@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3939994672172623951}
   - component: {fileID: 7257531938953859967}
   - component: {fileID: 8426759645955675649}
-  - component: {fileID: 6566303326287434194}
   m_Layer: 0
   m_Name: AtomRocket
   m_TagString: Untagged
@@ -209,18 +208,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6566303326287434194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101692987545630889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf10ffbf530960c4ba0a7332ab7d2f1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &332955299766408781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,14 +1166,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
---- !u!4 &4484172826092322518 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4940884351362868, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
-  m_PrefabInstance: {fileID: 4479804924738312674}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &4365322115880465566 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198100719057022332, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
+  m_PrefabInstance: {fileID: 4479804924738312674}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4484172826092322518 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4940884351362868, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
   m_PrefabInstance: {fileID: 4479804924738312674}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6789285946163916911
