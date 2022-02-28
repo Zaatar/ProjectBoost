@@ -5,14 +5,11 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] LevelManager levelManager;
     [SerializeField] GameObject backgroundImage;
-
-    private void Start()
-    {
-        this.gameObject.SetActive(true);
-    }
-
+    [SerializeField] OptionsMenu optionsMenuUI;
+    
     public void PlayGame()
     {
+        backgroundImage.SetActive(false);
         this.gameObject.SetActive(false);
         levelManager.LoadNextLevel();
     }
@@ -20,5 +17,12 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void TransitionToOptionsMenu()
+    {
+        this.gameObject.SetActive(false);
+        optionsMenuUI.gameObject.SetActive(true);
+        optionsMenuUI.SetTransitionSource(OptionsMenu.TransitionSource.MAIN_MENU);
     }
 }

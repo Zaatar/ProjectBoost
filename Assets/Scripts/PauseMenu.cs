@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
+    [SerializeField] OptionsMenu optionsMenuUI;
     [SerializeField] GameObject pauseMenuUI;
-    [SerializeField] GameObject optionsMenuUI;
 
     private void Update()
     {
@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
 
     void DisplayAppropriateMenu()
     {
-        if(optionsMenuUI.activeSelf)
+        if (optionsMenuUI.gameObject.activeSelf)
         {
             DisplayPauseMenu();
         }
@@ -35,11 +35,11 @@ public class PauseMenu : MonoBehaviour
 
     void DisplayPauseMenu()
     {
-        optionsMenuUI.SetActive(false);
+        optionsMenuUI.gameObject.SetActive(false);
         pauseMenuUI.SetActive(true);
     }
 
-    void ResumeGame()
+    public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
@@ -53,10 +53,11 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
     }
 
-    public void LoadMenu()
+    public void TransitionToOptionsMenu()
     {
         pauseMenuUI.SetActive(false);
-        optionsMenuUI.SetActive(true);
+        optionsMenuUI.gameObject.SetActive(true);
+        optionsMenuUI.SetTransitionSource(OptionsMenu.TransitionSource.PAUSE_MENU);
     }
 
     public void QuitGame()

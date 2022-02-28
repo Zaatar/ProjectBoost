@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody), typeof(AudioSource))]
 public class Movement : MonoBehaviour
@@ -9,6 +10,8 @@ public class Movement : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] AudioClip vfx_EngineThrust;
     [SerializeField] ParticleSystem ps_Booster;
+    [SerializeField] Joystick joyStick;
+    [SerializeField] Button thrustButton;
 
     Rigidbody playerRigidbody;
     AudioSource playerAudioSource;
@@ -23,6 +26,25 @@ public class Movement : MonoBehaviour
     {
         ProcessThrust();
         ProcessRotation();
+    }
+
+    void ApplyThrustTouchScreen()
+    {
+        playerRigidbody.AddRelativeForce(Vector3.up * Time.deltaTime * thrustSpeed);
+        if (!ps_Booster.isPlaying)
+        {
+            ps_Booster.Play();
+        }
+        if (!playerAudioSource.isPlaying)
+        {
+            playerAudioSource.PlayOneShot(vfx_EngineThrust);
+        }
+    }
+
+    void NegateThrustTouchScreen()
+    {
+        playerAudioSource.Stop();
+        ps_Booster.Stop();
     }
 
     void ProcessThrust()
@@ -47,11 +69,11 @@ public class Movement : MonoBehaviour
     
     void ProcessRotation()
     {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || joyStick.Horizontal < -0.3f)
         {
             ApplyRotation(rotationSpeed);
         }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || joyStick.Horizontal > 0.3f)
         {
             ApplyRotation(-rotationSpeed);
         }

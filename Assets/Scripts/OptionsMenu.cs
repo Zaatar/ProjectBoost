@@ -6,30 +6,23 @@ using TMPro;
 public class OptionsMenu : MonoBehaviour
 {
     [SerializeField] AudioMixer audioMixer;
+    [SerializeField] TMP_Dropdown graphicsDropdown;
     [SerializeField] TMP_Dropdown resolutionDropdown;
+    [SerializeField] MainMenu mainMenuUI;
+    [SerializeField] PauseMenu pauseMenuUI;
     Resolution[] resolutions;
+    TransitionSource transitionSource = TransitionSource.PAUSE_MENU;
+
+    public enum TransitionSource
+    {
+        MAIN_MENU,
+        PAUSE_MENU
+    };
 
     private void Start()
     {
-        resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
-
-        List<string> resolutionOptions = new List<string>();
-        int currentResolutionIndex = 0;
-
-        for(int i  = 0; i < resolutions.Length; i++)
-        {
-            string option = resolutions[i].width + " x " + resolutions[i].height + " @ " + resolutions[i].refreshRate + " Hz";
-            resolutionOptions.Add(option);
-
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = i;
-            }
-        }
-        resolutionDropdown.AddOptions(resolutionOptions);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+        populateResolutionDropdown();
+        populateGraphicsDropdown();
     }
 
     public void SetVolume(float volume)
@@ -51,6 +44,60 @@ public class OptionsMenu : MonoBehaviour
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
 
+    public void SetTransitionSource(TransitionSource source)
+    {
+        transitionSource = source;
+    }
+
+    void populateGraphicsDropdown()
+    {
+        //graphicsDropdown.ClearOptions();
+        List<string> graphicsDropdownOptions = new List<string>();
+        graphicsDropdownOptions.Add("VERY LOW");
+        graphicsDropdownOptions.Add("LOW");
+        graphicsDropdownOptions.Add("MEDIUM");
+        graphicsDropdownOptions.Add("HIGH");
+        graphicsDropdownOptions.Add("ULTRA HIGH");
+        graphicsDropdownOptions.Add("VERY HIGH");
+        graphicsDropdown.value = 2;
+        //graphicsDropdown.RefreshShownValue();
+    }
+
+    void populateResolutionDropdown()
+    {
+        resolutions = Screen.resolutions;
+        resolutionDropdown.ClearOptions();
+
+        List<string> resolutionOptions = new List<string>();
+        int currentResolutionIndex = 0;
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " + resolutions[i].height + " @ " + resolutions[i].refreshRate + " Hz";
+            resolutionOptions.Add(option);
+
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            {
+                currentResolutionIndex = i;
+            }
+        }
+        resolutionDropdown.AddOptions(resolutionOptions);
+        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+    }
+
+    public void TransitionFromOptionsMenu()
+    {
+        this.gameObject.SetActive(false);
+        if(transitionSource == TransitionSource.MAIN_MENU)
+        {
+            mainMenuUI.gameObject.SetActive(true);
+        }
+        else
+        {
+            pauseMenuUI.gameObject.SetActive(true);
+        }
     }
 }
