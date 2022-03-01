@@ -5,15 +5,6 @@ using UnityEngine;
 public class ThrustButton : MonoBehaviour
 {
     Movement rocketMovement;
-
-    void Start()
-    {
-        if (FindObjectOfType<Movement>())
-        {
-            rocketMovement = FindObjectOfType<Movement>();
-        }
-    }
-
     public void pointerDown()
     {
         if (FindObjectOfType<Movement>())

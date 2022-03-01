@@ -6,7 +6,6 @@ using TMPro;
 public class OptionsMenu : MonoBehaviour
 {
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] TMP_Dropdown graphicsDropdown;
     [SerializeField] TMP_Dropdown resolutionDropdown;
     [SerializeField] MainMenu mainMenuUI;
     [SerializeField] PauseMenu pauseMenuUI;
@@ -22,7 +21,6 @@ public class OptionsMenu : MonoBehaviour
     private void Start()
     {
         populateResolutionDropdown();
-        populateGraphicsDropdown();
     }
 
     public void SetVolume(float volume)
@@ -51,20 +49,6 @@ public class OptionsMenu : MonoBehaviour
         transitionSource = source;
     }
 
-    void populateGraphicsDropdown()
-    {
-        //graphicsDropdown.ClearOptions();
-        List<string> graphicsDropdownOptions = new List<string>();
-        graphicsDropdownOptions.Add("VERY LOW");
-        graphicsDropdownOptions.Add("LOW");
-        graphicsDropdownOptions.Add("MEDIUM");
-        graphicsDropdownOptions.Add("HIGH");
-        graphicsDropdownOptions.Add("ULTRA HIGH");
-        graphicsDropdownOptions.Add("VERY HIGH");
-        graphicsDropdown.value = 2;
-        //graphicsDropdown.RefreshShownValue();
-    }
-
     void populateResolutionDropdown()
     {
         resolutions = Screen.resolutions;
@@ -75,7 +59,7 @@ public class OptionsMenu : MonoBehaviour
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height + " @ " + resolutions[i].refreshRate + " Hz";
+            string option = resolutions[i].width + "x" + resolutions[i].height + "@" + resolutions[i].refreshRate + "Hz";
             resolutionOptions.Add(option);
 
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
