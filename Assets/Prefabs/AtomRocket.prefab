@@ -90,10 +90,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrustSpeed: 1000
-  rotationSpeed: 500
+  rotationSpeed: 200
   vfx_EngineThrust: {fileID: 8300000, guid: 2054b5b231469ba43b299584b7f16126, type: 3}
   ps_Booster: {fileID: 4365322115880465566}
   joyStick: {fileID: 0}
+  thrustButton: {fileID: 0}
+  isThrustClicked: 0
 --- !u!114 &7257531938953859967
 MonoBehaviour:
   m_ObjectHideFlags: 0

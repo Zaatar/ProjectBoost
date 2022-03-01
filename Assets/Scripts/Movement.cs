@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem ps_Booster;
     [SerializeField] Joystick joyStick;
     [SerializeField] Button thrustButton;
+    public bool isThrustClicked;
 
     Rigidbody playerRigidbody;
     AudioSource playerAudioSource;
@@ -28,28 +29,9 @@ public class Movement : MonoBehaviour
         ProcessRotation();
     }
 
-    void ApplyThrustTouchScreen()
-    {
-        playerRigidbody.AddRelativeForce(Vector3.up * Time.deltaTime * thrustSpeed);
-        if (!ps_Booster.isPlaying)
-        {
-            ps_Booster.Play();
-        }
-        if (!playerAudioSource.isPlaying)
-        {
-            playerAudioSource.PlayOneShot(vfx_EngineThrust);
-        }
-    }
-
-    void NegateThrustTouchScreen()
-    {
-        playerAudioSource.Stop();
-        ps_Booster.Stop();
-    }
-
     void ProcessThrust()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || isThrustClicked)
         {
             playerRigidbody.AddRelativeForce(Vector3.up * Time.deltaTime * thrustSpeed);
             if(!ps_Booster.isPlaying)
