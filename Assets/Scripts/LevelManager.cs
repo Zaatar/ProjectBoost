@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private int startLevel = 1;
     [SerializeField] private Transform levelsParent = null;
-    [SerializeField] private Transform mobileControls = null;
+    [SerializeField] private MobileControls mobileControls = null;
 
     private int currentLevel = 0;
     private Transform currentLevelInstance = null;
@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
         }
         ReloadLevel();
         InstantiateMobileControls();
+        mobileControls.LocateMovement();
     }
 
     public void ReloadLevel()
@@ -42,6 +43,7 @@ public class LevelManager : MonoBehaviour
         Destroy(currentLevelInstance.gameObject);
         currentLevelInstance = Instantiate(levelsParent.GetChild(currentLevel));
         currentLevelInstance.gameObject.SetActive(true);
+        mobileControls.LocateMovement();
     }
 
     public void IncrementStartLevel()

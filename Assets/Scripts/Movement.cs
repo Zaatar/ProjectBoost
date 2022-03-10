@@ -10,9 +10,9 @@ public class Movement : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] AudioClip vfx_EngineThrust;
     [SerializeField] ParticleSystem ps_Booster;
-    [SerializeField] Joystick joyStick;
-    [SerializeField] Button thrustButton;
-    public bool isThrustClicked;
+    bool isThrustPressed;
+    bool isRotateLeftPressed;
+    bool isRotateRightPressed;
 
     Rigidbody playerRigidbody;
     AudioSource playerAudioSource;
@@ -31,7 +31,7 @@ public class Movement : MonoBehaviour
 
     void ProcessThrust()
     {
-        if (Input.GetKey(KeyCode.Space) || isThrustClicked)
+        if (Input.GetKey(KeyCode.Space) || isThrustPressed)
         {
             playerRigidbody.AddRelativeForce(Vector3.up * Time.deltaTime * thrustSpeed);
             if(!ps_Booster.isPlaying)
@@ -51,11 +51,11 @@ public class Movement : MonoBehaviour
     
     void ProcessRotation()
     {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || joyStick.Horizontal < -0.3f)
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || isRotateLeftPressed)
         {
             ApplyRotation(rotationSpeed);
         }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || joyStick.Horizontal > 0.3f)
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || isRotateRightPressed)
         {
             ApplyRotation(-rotationSpeed);
         }
@@ -66,5 +66,20 @@ public class Movement : MonoBehaviour
         playerRigidbody.freezeRotation = true;
         transform.Rotate(Vector3.forward * Time.deltaTime * rotationThisFrame);
         playerRigidbody.freezeRotation = false;
+    }
+
+    public void setThrustPressed(bool value)
+    {
+        isThrustPressed = value;
+    }
+
+    public void setRotateLeftPressed(bool value)
+    {
+        isRotateLeftPressed = value;
+    }
+
+    public void setRotateRightPressed(bool value)
+    {
+        isRotateRightPressed = value;
     }
 }
