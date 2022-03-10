@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    void DisplayAppropriateMenu()
+    public void DisplayAppropriateMenu()
     {
         if (optionsMenuUI.gameObject.activeSelf)
         {

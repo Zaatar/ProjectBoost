@@ -5,6 +5,19 @@ using UnityEngine;
 public class MobileControls : MonoBehaviour
 {
     Movement rocketMovement;
+    LevelManager levelManager = null;
+
+    public void Start()
+    {
+        if(FindObjectOfType<LevelManager>())
+        {
+            levelManager = FindObjectOfType<LevelManager>();
+        }
+        else
+        {
+            Debug.Log("Level Manager not found, error!");
+        }
+    }
 
     public void LocateMovement()
     {
@@ -46,5 +59,10 @@ public class MobileControls : MonoBehaviour
     public void ThrustButtonUnpressed()
     {
         rocketMovement.setThrustPressed(false);
+    }
+
+    public void OptionsButtonPressed()
+    {
+        levelManager.displayMobileOptionsMenu();
     }
 }

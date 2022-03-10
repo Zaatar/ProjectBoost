@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int startLevel = 1;
     [SerializeField] private Transform levelsParent = null;
     [SerializeField] private MobileControls mobileControls = null;
+    private PauseMenu pauseMenu = null;
 
     private int currentLevel = 0;
     private Transform currentLevelInstance = null;
@@ -23,6 +24,14 @@ public class LevelManager : MonoBehaviour
             currentLevel = startLevel - 1;
             currentLevelInstance = Instantiate(levelsParent.GetChild(currentLevel));
             currentLevelInstance.gameObject.SetActive(true);
+        }
+        if(FindObjectOfType<PauseMenu>())
+        {
+            pauseMenu = FindObjectOfType<PauseMenu>();
+        }
+        else
+        {
+            Debug.Log("Pause Menu not found in the current scene");
         }
     }
 
@@ -54,5 +63,10 @@ public class LevelManager : MonoBehaviour
     public void InstantiateMobileControls()
     {
         mobileControls.gameObject.SetActive(true);
+    }
+
+    public void displayMobileOptionsMenu()
+    {
+        pauseMenu.DisplayAppropriateMenu();
     }
 }
