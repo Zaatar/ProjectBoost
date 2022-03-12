@@ -55,7 +55,8 @@ public class PauseMenu : MonoBehaviour
 
     public void TransitionToOptionsMenu()
     {
-        pauseMenuUI.SetActive(false);
+        //pauseMenuUI.SetActive(false);
+        this.gameObject.SetActive(false);
         optionsMenuUI.gameObject.SetActive(true);
         optionsMenuUI.SetTransitionSource(OptionsMenu.TransitionSource.PAUSE_MENU);
     }
