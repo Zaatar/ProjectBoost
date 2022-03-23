@@ -21,6 +21,7 @@ public class OptionsMenu : MonoBehaviour
     private void Start()
     {
         populateResolutionDropdown();
+        QualitySettings.SetQualityLevel(2);
     }
 
     public void SetVolume(float volume)

@@ -43,8 +43,16 @@ public class LevelManager : MonoBehaviour
             currentLevel = startLevel - 1;
         }
         ReloadLevel();
-        InstantiateMobileControls();
-        mobileControls.LocateMovement();
+        // If the level manager is reloading the first level, i.e the player beat the game, deactivate
+        // Mobile Controls from main screen
+        if (currentLevel == startLevel - 1)
+        {
+            DeactivateMobileControls();
+        }
+        else
+        {
+            ActivateMobileControls();
+        }
     }
 
     public void ReloadLevel()
@@ -60,9 +68,14 @@ public class LevelManager : MonoBehaviour
         startLevel++;
     }
 
-    public void InstantiateMobileControls()
+    public void ActivateMobileControls()
     {
         mobileControls.gameObject.SetActive(true);
+    }
+
+    public void DeactivateMobileControls()
+    {
+        mobileControls.gameObject.SetActive(false);
     }
 
     public void displayMobileOptionsMenu()

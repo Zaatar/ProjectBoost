@@ -10,6 +10,7 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] ParticleSystem ps_Success;
     [SerializeField] ParticleSystem ps_Explosion;
     [SerializeField] LevelManager levelManager;
+    [SerializeField] float rocketRotationForwardLerpSpeed = 0.1f;
 
     AudioSource objectAudioSource;
     bool isTransitioning = false;
@@ -61,11 +62,12 @@ public class CollisionHandler : MonoBehaviour
 
     void StartSuccessSequence()
     {
+        gameObject.GetComponent<Movement>().enabled = false;
+        RotateRocketUpwards();
         isTransitioning = true;
         objectAudioSource.Stop();
         objectAudioSource.PlayOneShot(vfx_Success);
         ps_Success.Play();
-        gameObject.GetComponent<Movement>().enabled = false;
         Invoke("LoadNextLevel", loadLevelDelay);
     }
 
@@ -75,7 +77,6 @@ public class CollisionHandler : MonoBehaviour
         objectAudioSource.Stop();
         objectAudioSource.PlayOneShot(vfx_Explosion);
         ps_Explosion.Play();
-        gameObject.GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", restartLevelDelay);
     }
 
@@ -86,5 +87,14 @@ public class CollisionHandler : MonoBehaviour
     void ReloadLevel()
     {
         levelManager.ReloadLevel();
+    }
+
+    void RotateRocketUpwards()
+    {
+        Transform currentTransform = gameObject.GetComponent<Transform>();
+        Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward);
+        currentTransform.rotation = Quaternion.Lerp(currentTransform.rotation, targetRotation,
+            Time.time * rocketRotationForwardLerpSpeed);
+        gameObject.GetComponent<Rigidbody>().freezeRotation = true;
     }
 }
